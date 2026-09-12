@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Instagram, Twitter, Youtube, Facebook } from 'lucide-react';
+import { ArrowRight, MessageSquare, Share2, Globe, Mail } from 'lucide-react';
 
 export default function Footer() {
   const links = {
@@ -26,16 +26,16 @@ export default function Footer() {
             </div>
             <div className="flex gap-4 text-white/50">
               <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white hover:border-white/30 transition-all">
-                <Instagram className="w-4 h-4" />
+                <Globe className="w-4 h-4" />
               </a>
               <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white hover:border-white/30 transition-all">
-                <Twitter className="w-4 h-4" />
+                <MessageSquare className="w-4 h-4" />
               </a>
               <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white hover:border-white/30 transition-all">
-                <Youtube className="w-4 h-4" />
+                <Share2 className="w-4 h-4" />
               </a>
               <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white hover:border-white/30 transition-all">
-                <Facebook className="w-4 h-4" />
+                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>

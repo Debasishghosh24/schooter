@@ -1,43 +1,46 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import ScooterViewer from './ScooterViewer';
 import ColorConfigurator from './ColorConfigurator';
 import ProductHotspots from './ProductHotspots';
 import DetailModal from './DetailModal';
-import { experienceColors, experienceHotspots, experienceSpecs } from '../../data/scooterExperience';
-
-const tabs = ['Performance', 'Battery', 'Features', 'Safety'];
+import { experienceColors, experienceHotspots } from '../../data/scooterExperience';
+import ImageWithFallback from '../common/ImageWithFallback';
 
 export default function ExperienceContainer() {
   const [activeColor, setActiveColor] = useState(experienceColors[0]);
   const [activeDetail, setActiveDetail] = useState(null);
-  const [activeTab, setActiveTab] = useState('Performance');
+
+  const thumbnails = [
+    '/images/scooter_white.jpg',
+    '/images/hero_scooter.jpg',
+    '/images/scooter_white.jpg'
+  ];
 
   return (
-    <section id="experience" className="relative min-h-[90vh] bg-transparent border-t border-white/5 py-24 overflow-hidden transition-colors duration-700">
+    <section id="experience" className="relative min-h-[80vh] bg-transparent border-t border-white/5 py-24 overflow-hidden transition-colors duration-700">
 
-      {/* Background radial glow matching the mockup in light mode */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-tr from-transparent via-[#1688F5]/10 to-[#00E5FF]/5 rounded-full blur-[100px] pointer-events-none -z-10 transition-colors duration-700" />
+      {/* Background Gradients */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F] via-[#0A192F] to-[#0D213F] -z-20" />
 
-      <div className="max-w-[1500px] mx-auto px-6 relative z-10 flex flex-col xl:flex-row items-center xl:items-start justify-between gap-12 xl:gap-8">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 relative z-10 flex flex-col xl:flex-row items-center xl:items-start justify-between gap-12 xl:gap-8 h-full">
 
-        {/* LEFT COLUMN: Title & Tabs */}
-        <div className="w-full xl:w-[28%] flex flex-col justify-start xl:pt-16">
+        {/* LEFT COLUMN: Title & Thumbnails */}
+        <div className="w-full xl:w-[25%] flex flex-col justify-start xl:pt-16">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-ev-cyan text-[10px] tracking-[0.25em] uppercase font-bold mb-4 transition-colors"
+            className="text-white/60 text-xs tracking-[0.2em] uppercase font-semibold mb-4 drop-shadow-md"
           >
-            EXPERIENCE EVERY ANGLE
+            EXPLORE EVERY DETAIL
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.1] transition-colors"
+            className="text-4xl md:text-5xl font-semibold tracking-tight text-white leading-tight drop-shadow-lg"
           >
             Designed To Be <br /> Seen From Every Side.
           </motion.h2>
@@ -46,82 +49,75 @@ export default function ExperienceContainer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-white/50 text-sm mt-4 mb-10 transition-colors max-w-sm"
+            className="text-white/70 text-sm mt-6 mb-12 max-w-sm drop-shadow-md leading-relaxed"
           >
-            Explore every detail of our electric scooter — from its signature lighting to its intelligent cockpit.
+            Interact, rotate and explore the details that make AEROEV different.
           </motion.p>
 
-          {/* Vertical Tabs */}
+          {/* Thumbnails */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="flex flex-col gap-1 w-[85%]"
+            className="flex items-center gap-4"
           >
-            {tabs.map((tab, i) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`text-left px-6 py-4 rounded-r-xl rounded-l-sm font-bold text-[15px] transition-all relative ${activeTab === tab
-                    ? 'glass-card border-l-[3px] border-ev-cyan text-white shadow-[0_0_15px_rgba(0,229,255,0.1)]'
-                    : 'text-white/40 hover:bg-white/5 border-l-[3px] border-transparent'
-                  }`}
-              >
-                {tab}
-              </button>
+            {thumbnails.map((thumb, i) => (
+              <div key={i} className={`w-16 h-16 md:w-20 md:h-20 rounded-xl glass-card overflow-hidden cursor-pointer hover:border-ev-cyan/50 transition-colors ${i === 0 ? 'border-ev-cyan/50 bg-[#1688F5]/10' : ''}`}>
+                <ImageWithFallback src={thumb} fallbackSrc="/images/scooter_white.jpg" alt={`Thumbnail ${i}`} className="w-full h-full object-cover opacity-80" />
+              </div>
             ))}
           </motion.div>
         </div>
 
         {/* CENTER COLUMN: Main Product Viewer Area */}
-        <div className="relative w-full xl:w-[45%] h-[50vh] md:h-[65vh] flex flex-col items-center justify-center">
+        <div className="relative w-full xl:w-[50%] h-[50vh] md:h-[60vh] flex flex-col items-center justify-center">
+
+          {/* Glowing Pedestal */}
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-[150px] border-2 border-ev-cyan/30 rounded-[100%] drop-shadow-[0_0_30px_rgba(0,229,255,0.4)] pointer-events-none -z-10 bg-gradient-to-b from-transparent to-[#00E5FF]/10" style={{ transform: 'translateX(-50%) rotateX(75deg)' }} />
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] h-[180px] border border-white/10 rounded-[100%] pointer-events-none -z-10" style={{ transform: 'translateX(-50%) rotateX(75deg)' }} />
 
           <div className="absolute inset-0 flex items-center justify-center">
             <ScooterViewer activeColor={activeColor} />
-
             <ProductHotspots
               hotspots={experienceHotspots}
               onSelect={setActiveDetail}
             />
           </div>
-
-          {/* Color Configurator pushed to bottom */}
-          <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 z-20">
-            <ColorConfigurator
-              colors={experienceColors}
-              activeColor={activeColor}
-              onSelect={setActiveColor}
-            />
-          </div>
-
         </div>
 
-        {/* RIGHT COLUMN: Technical Specs Card */}
-        <div className="w-full xl:w-[27%] flex flex-col justify-center xl:pt-24 items-center xl:items-end">
+        {/* RIGHT COLUMN: Color Configurator */}
+        <div className="w-full xl:w-[25%] flex flex-col justify-center xl:pt-24 items-center xl:items-end">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="glass-card p-8 rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full max-w-[340px] flex flex-col gap-6 transition-colors duration-700"
+            className="w-full flex flex-col items-end mb-16"
           >
-            <h3 className="text-white font-bold text-lg mb-2 transition-colors">Technical Specifications</h3>
+            <h3 className="text-white/60 font-bold text-xs tracking-[0.2em] uppercase mb-6 drop-shadow-md">Choose Your Finish</h3>
+            
+            <ColorConfigurator
+              colors={experienceColors}
+              activeColor={activeColor}
+              onSelect={setActiveColor}
+              layout="vertical"
+            />
+          </motion.div>
 
-            <div className="flex flex-col gap-5">
-              {experienceSpecs.slice(0, 4).map((spec, idx) => (
-                <div key={idx} className="flex flex-col border-b border-white/10 pb-3 last:border-0 last:pb-0">
-                  <p className="text-[10px] text-white/40 uppercase tracking-widest font-bold mb-1 transition-colors">{spec.label}</p>
-                  <p className="text-xl font-bold text-white transition-colors">
-                    {spec.value} {spec.unit && <span className="text-sm font-medium">{spec.unit}</span>}
-                  </p>
-                </div>
-              ))}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-col items-center gap-2"
+          >
+            <div className="text-white flex flex-col items-center relative drop-shadow-md">
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 border border-white/50 rounded-full" style={{borderTopColor: 'transparent', transform: 'translate(-50%, -50%) rotate(-45deg)'}}></div>
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 border border-white/50 rounded-full" style={{borderBottomColor: 'transparent', transform: 'translate(-50%, -50%) rotate(-45deg)'}}></div>
+              <span className="font-semibold tracking-wider text-sm mt-3">360°</span>
+              <span className="text-[9px] text-white/70 tracking-widest uppercase mt-3">Drag to rotate</span>
             </div>
-
-            <button className="mt-2 w-full px-6 py-4 rounded-full bg-white/5 text-white text-sm font-bold border border-white/10 hover:bg-white/10 hover:border-white/20 shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2">
-              View Full Specs <ArrowRight className="w-4 h-4" />
-            </button>
           </motion.div>
         </div>
 

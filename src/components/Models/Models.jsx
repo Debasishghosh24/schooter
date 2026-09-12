@@ -78,7 +78,7 @@ export default function Models() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
                 key={scooter.id}
-                className={`group relative overflow-hidden glass-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between ${idx === 0 ? 'ring-1 ring-ev-cyan/40 shadow-[0_8px_32px_rgba(0,229,255,0.15)]' : ''
+                className={`group relative overflow-hidden glass-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between ${scooter.name === 'AERO V1 Lite' ? 'ring-1 ring-ev-cyan/40 shadow-[0_8px_32px_rgba(0,229,255,0.15)] bg-[#1688F5]/10' : ''
                   }`}
               >
                 {scooter.name === 'AERO V1 Lite' && (
@@ -128,7 +128,7 @@ export default function Models() {
                     {scooter.colors && scooter.colors.map((color, i) => (
                       <div
                         key={i}
-                        className={`w-3 h-3 rounded-full border border-white/20 ${i === 0 && idx === 0 ? 'ring-1 ring-offset-2 ring-offset-[#0A192F] ring-white' : ''}`}
+                        className={`w-3 h-3 rounded-full border border-white/20 ${i === 2 && scooter.name === 'AERO V1 Lite' ? 'ring-1 ring-offset-2 ring-offset-[#0A192F] ring-white' : ''}`}
                         style={{ backgroundColor: color }}
                       />
                     ))}

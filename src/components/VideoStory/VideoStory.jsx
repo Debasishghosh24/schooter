@@ -76,92 +76,99 @@ export default function VideoStory() {
   };
 
   return (
-    <section ref={containerRef} className="py-24 bg-transparent border-t border-white/5 relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+    <section ref={containerRef} className="relative w-full h-[600px] md:h-[800px] overflow-hidden border-t border-white/5">
+      {/* Background Video / Fallback Image */}
+      <div className="absolute inset-0 z-0">
+        {!videoError ? (
+          <video
+            ref={videoRef}
+            src="/assets/videos/cityscape-scooter-sunset.mp4"
+            poster="/images/cityscape-scooter-poster.jpg"
+            className="w-full h-full object-cover mix-blend-screen opacity-80"
+            muted={isMuted}
+            loop
+            playsInline
+            onError={() => setVideoError(true)}
+          />
+        ) : (
+          <ImageWithFallback
+            src="/images/cityscape-scooter-poster.jpg"
+            fallbackSrc="/images/hero_scooter.jpg"
+            alt="Electric Scooter at Sunset"
+            className="w-full h-full object-cover mix-blend-screen opacity-80"
+          />
+        )}
+        
+        {/* Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A192F] via-[#0A192F]/60 to-[#0A192F]/20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-transparent to-transparent pointer-events-none" />
+      </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden glass-card shadow-[0_0_40px_rgba(0,229,255,0.15)] group"
-        >
-          {/* Background Video / Fallback Image */}
-          {!videoError ? (
-            <video
-              ref={videoRef}
-              src="/assets/videos/cityscape-scooter-sunset.mp4"
-              poster="/images/cityscape-scooter-poster.jpg"
-              className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s] ease-out mix-blend-screen opacity-80"
-              muted={isMuted}
-              loop
-              playsInline
-              onError={() => setVideoError(true)}
-            />
-          ) : (
-            <ImageWithFallback
-              src="/images/cityscape-scooter-poster.jpg"
-              fallbackSrc="/images/hero_scooter.jpg"
-              alt="Electric Scooter at Sunset"
-              className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s] ease-out mix-blend-screen opacity-80"
-            />
-          )}
+      <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 h-full flex flex-col md:flex-row items-center justify-between py-24">
+        
+        {/* Left Content */}
+        <div className="w-full md:w-1/2 flex flex-col items-start text-left h-full justify-center">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-white/60 text-xs tracking-[0.2em] uppercase font-semibold mb-4 drop-shadow-md"
+          >
+            EXPERIENCE EVERY ANGLE
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-semibold tracking-tight text-white leading-tight drop-shadow-lg mb-6"
+          >
+            A Smarter <br /> Way to Move
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-white/80 text-sm md:text-base max-w-md font-light mb-8 drop-shadow-md leading-relaxed"
+          >
+            Cities are changing. So are we. Experience how AEROEV is designed for a cleaner, smarter and brighter tomorrow.
+          </motion.p>
 
-          {/* Dark Gradients for Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 via-[#0A192F]/20 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A192F]/60 via-transparent to-[#0A192F]/60 pointer-events-none" />
-
-          {/* Overlay Content */}
-          <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-between p-8 md:p-16">
-
-            {/* Left Text */}
-            <div className="w-full md:w-1/3 text-left">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-3xl md:text-5xl font-medium tracking-tight text-white leading-tight drop-shadow-lg"
-              >
-                A Smarter <br /> Way to Move
-              </motion.h2>
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            onClick={handleOpenModal}
+            className="flex items-center gap-4 cursor-pointer group/btn"
+          >
+            <div className="w-12 h-12 rounded-full border border-white flex items-center justify-center text-white group-hover/btn:bg-white group-hover/btn:text-[#0A192F] transition-all duration-300">
+              <Play className="w-4 h-4 ml-1 fill-current" />
             </div>
+            <span className="text-sm font-semibold text-white group-hover/btn:text-ev-cyan transition-colors">
+              Watch Our Story
+            </span>
+          </motion.button>
+        </div>
 
-            {/* Center Play Button */}
-            <div className="w-full md:w-1/3 flex justify-center my-8 md:my-0">
-              <motion.button
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleOpenModal}
-                className="flex flex-col items-center gap-4 cursor-pointer group/btn"
-              >
-                <div className="w-20 h-20 rounded-full border border-ev-cyan/40 flex items-center justify-center text-ev-cyan bg-ev-cyan/10 backdrop-blur-md group-hover/btn:bg-ev-cyan group-hover/btn:text-[#0A192F] transition-all duration-300 shadow-[0_0_30px_rgba(0,229,255,0.2)]">
-                  <Play className="w-8 h-8 ml-1" />
-                </div>
-                <span className="text-xs tracking-[0.2em] font-medium text-ev-cyan uppercase group-hover/btn:text-white transition-colors">
-                  Watch Our Story
-                </span>
-              </motion.button>
-            </div>
-
-            {/* Right Text */}
-            <div className="w-full md:w-1/3 flex justify-end">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col text-right space-y-2 drop-shadow-md"
-              >
-                <span className="text-xs font-semibold tracking-[0.2em] uppercase text-white">CLEANER AIR</span>
-                <span className="text-xs font-semibold tracking-[0.2em] uppercase text-white">GREENER CITIES</span>
-                <span className="text-xs font-semibold tracking-[0.2em] uppercase text-white">HAPPIER PEOPLE</span>
-              </motion.div>
-            </div>
-
+        {/* Right Content */}
+        <div className="w-full md:w-1/2 h-full flex flex-col items-end justify-between py-12 pointer-events-none">
+          {/* Top Right: Cleaner Air */}
+          <div className="flex flex-col items-end text-right space-y-2 mt-auto mb-16 md:mb-0 md:mt-24">
+            <span className="text-white font-bold tracking-[0.2em] uppercase text-sm drop-shadow-md">CLEANER AIR</span>
+            <span className="text-white font-bold tracking-[0.2em] uppercase text-sm drop-shadow-md">GREENER CITIES</span>
+            <span className="text-white font-bold tracking-[0.2em] uppercase text-sm drop-shadow-md">HAPPIER PEOPLE</span>
           </div>
-        </motion.div>
+          
+          {/* Bottom Right: Scroll indicator */}
+          <div className="flex flex-col items-center mt-auto">
+            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1 relative mb-3">
+              <div className="w-1 h-2 bg-white rounded-full animate-bounce" />
+            </div>
+            <span className="text-[9px] text-white/50 tracking-widest uppercase">Scroll to explore</span>
+          </div>
+        </div>
+
       </div>
 
       {/* Fullscreen Video Modal */}

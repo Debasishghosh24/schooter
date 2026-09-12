@@ -1,142 +1,122 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, BatteryCharging, Zap, Smartphone } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ImageWithFallback from '../common/ImageWithFallback';
 
 const technologies = [
   {
-    id: 'display',
-    title: 'Smart Display',
-    label: 'INTELLIGENT COCKPIT',
-    description: 'A brilliant 7-inch TFT display providing real-time ride metrics, navigation, and seamless smartphone integration right at your fingertips.',
-    stat: '7" HD TFT',
-    icon: <Cpu className="w-5 h-5 text-ev-cyan" />,
-    image: '/images/gallery_dashboard.jpg', // Guaranteed scooter dashboard
-    reverse: false
-  },
-  {
     id: 'battery',
     title: 'Advanced Battery',
-    label: 'ENERGY DYNAMICS',
-    description: 'High-density lithium-ion core placed perfectly within the chassis for optimal center of gravity, delivering unmatched range and performance.',
-    stat: '5.2 kWh',
-    icon: <BatteryCharging className="w-5 h-5 text-ev-cyan" />,
-    image: '/images/scooter_white.jpg', // Guaranteed scooter asset
-    reverse: true
+    description: 'Longer range, faster charging.',
+    image: '/images/gallery_dashboard.jpg', // Placeholder for battery image
   },
   {
-    id: 'charging',
-    title: 'Fast Charging',
-    label: 'RAPID RECOVERY',
-    description: 'Engineered for the urban pace. Our proprietary charging system gets you back on the road with minimal downtime.',
-    stat: '0-80% in 45m',
-    icon: <Zap className="w-5 h-5 text-ev-cyan" />,
-    image: '/images/hero_scooter.jpg', // Guaranteed scooter asset
-    reverse: false
+    id: 'display',
+    title: 'Smart Display',
+    description: 'Real-time ride insights.',
+    image: '/images/gallery_dashboard.jpg',
   },
   {
     id: 'app',
     title: 'Connected App',
-    label: 'DIGITAL ECOSYSTEM',
-    description: 'Total control from your pocket. Track location, monitor battery health, and customize ride modes before you even step on.',
-    stat: '4G LTE GPS',
-    icon: <Smartphone className="w-5 h-5 text-ev-cyan" />,
-    image: '/images/scooter_white.jpg', // Guaranteed scooter asset
-    reverse: true
+    description: 'Your ride, your way.',
+    image: '/images/gallery_dashboard.jpg', // Placeholder for app image
+  },
+  {
+    id: 'braking',
+    title: 'Regenerative Braking',
+    description: 'More range, less impact.',
+    image: '/images/gallery_dashboard.jpg', // Placeholder for motor image
   }
 ];
 
 export default function Technology() {
   return (
-    <section id="technology" className="py-16 md:py-24 bg-ev-dark border-t border-white/5 relative overflow-hidden transition-colors duration-700">
-      <div className="max-w-6xl mx-auto px-6">
-
-        {/* Compact Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="text-3xl md:text-4xl font-medium tracking-tight text-white mb-3 transition-colors"
-          >
-            Technology That Moves You Forward
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ delay: 0.1 }}
-            className="text-white/50 text-sm max-w-lg mx-auto font-light transition-colors"
-          >
-            Engineered from the ground up to redefine urban mobility.
-          </motion.p>
-        </div>
-
-        {/* Alternating Layout */}
-        <div className="flex flex-col gap-16 md:gap-20">
-          {technologies.map((tech, idx) => (
-            <div
-              key={tech.id}
-              className={`flex flex-col ${tech.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-16 group`}
+    <section id="technology" className="py-24 bg-transparent border-t border-white/5 relative overflow-hidden transition-colors duration-700">
+      
+      {/* Background Gradients */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F] to-[#122A4E]/50 -z-20" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#1688F5]/10 rounded-full blur-[120px] -z-10" />
+      
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
+        <div className="flex flex-col xl:flex-row gap-12 items-center xl:items-stretch">
+          
+          {/* Left Text Block */}
+          <div className="w-full xl:w-1/3 flex flex-col items-start justify-center text-left xl:pr-8">
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-white/60 text-xs tracking-[0.2em] uppercase font-semibold mb-4 drop-shadow-md"
             >
+              BUILT FOR A SMARTER TOMORROW
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-semibold tracking-tight text-white mb-6 drop-shadow-md leading-tight"
+            >
+              Technology That <br className="hidden md:block" /> Moves You Forward
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-white/70 text-sm max-w-md font-light mb-8 drop-shadow-md leading-relaxed"
+            >
+              Pure intelligent battery system to a connected riding experience, every detail is designed to take you further.
+            </motion.p>
+            <motion.button
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="btn-secondary px-6 py-3 flex items-center gap-2 text-sm"
+            >
+              Explore Technology <ArrowRight className="w-4 h-4" />
+            </motion.button>
+          </div>
 
-              {/* Image Area */}
+          {/* Right Cards Block */}
+          <div className="w-full xl:w-2/3 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-12 xl:mt-0">
+            {technologies.map((tech, idx) => (
               <motion.div
-                initial={{ opacity: 0, scale: 0.97, x: tech.reverse ? 20 : -20 }}
-                whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="w-full md:w-1/2"
+                key={tech.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 + (idx * 0.1) }}
+                className="glass-card overflow-hidden group hover:-translate-y-2 transition-all duration-500 flex flex-col border border-white/10 hover:border-ev-cyan/30"
               >
-                <div className="relative aspect-[4/3] rounded-[20px] overflow-hidden glass-card transition-all duration-700 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,229,255,0.1)]">
+                {/* Image Area */}
+                <div className="w-full pt-8 px-4 flex-1 flex items-center justify-center bg-gradient-to-b from-white/5 to-transparent relative">
+                   <div className="absolute inset-0 bg-ev-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <ImageWithFallback
                     src={tech.image}
-                    fallbackSrc="/images/scooter_white.jpg"
+                    fallbackSrc="/images/gallery_dashboard.jpg"
                     alt={tech.title}
-                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700 ease-out mix-blend-screen"
+                    className="w-full h-auto object-contain max-h-32 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
-                  {/* Subtle lighting overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none transition-colors" />
+                </div>
+
+                {/* Text Area */}
+                <div className="p-5 flex flex-col justify-end bg-gradient-to-t from-[#061121] to-transparent">
+                  <h3 className="text-sm font-semibold text-white mb-1 group-hover:text-ev-cyan transition-colors">
+                    {tech.title}
+                  </h3>
+                  <p className="text-white/50 text-[11px] font-medium transition-colors">
+                    {tech.description}
+                  </p>
                 </div>
               </motion.div>
+            ))}
+          </div>
 
-              {/* Text Area */}
-              <motion.div
-                initial={{ opacity: 0, x: tech.reverse ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                className="w-full md:w-1/2 flex flex-col items-start text-left"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-ev-cyan/10 border border-ev-cyan/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <div>
-                      {tech.icon}
-                    </div>
-                  </div>
-                  <span className="text-[10px] text-white/50 uppercase tracking-[0.2em] font-medium transition-colors">
-                    {tech.label}
-                  </span>
-                </div>
-
-                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-3 tracking-tight transition-colors">
-                  {tech.title}
-                </h3>
-
-                <p className="text-white/60 text-sm md:text-base leading-relaxed font-light mb-6 transition-colors">
-                  {tech.description}
-                </p>
-
-                <div className="inline-flex items-baseline gap-2 border-b border-white/20 pb-1 transition-colors">
-                  <span className="text-lg font-medium text-white transition-colors">{tech.stat}</span>
-                </div>
-              </motion.div>
-
-            </div>
-          ))}
         </div>
-
       </div>
     </section>
   );

@@ -4,33 +4,33 @@ import { X, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import ImageWithFallback from '../common/ImageWithFallback';
 
 const galleryImages = [
-  { 
-    id: 1, 
-    src: '/images/gallery_landscape.jpg', 
+  {
+    id: 1,
+    src: '/images/gallery_landscape.jpg',
     alt: 'Electric Scooter Front 3/4 Architectural',
     gridClass: 'md:col-span-2 xl:col-span-3 xl:row-span-1'
   },
-  { 
-    id: 2, 
-    src: '/images/gallery_portrait.jpg', 
+  {
+    id: 2,
+    src: '/images/gallery_portrait.jpg',
     alt: 'Electric Scooter Side Rear Studio',
     gridClass: 'md:col-span-2 xl:col-span-1 xl:row-span-2'
   },
-  { 
-    id: 3, 
-    src: '/images/hero_scooter.jpg', 
+  {
+    id: 3,
+    src: '/images/hero_scooter.jpg',
     alt: 'Electric Scooter Close Up',
     gridClass: 'md:col-span-1 xl:col-span-1 xl:row-span-1 aspect-square xl:aspect-auto'
   },
-  { 
-    id: 4, 
-    src: '/images/gallery_night.jpg', 
+  {
+    id: 4,
+    src: '/images/gallery_night.jpg',
     alt: 'Electric Scooter Night Urban Ride',
     gridClass: 'md:col-span-1 xl:col-span-1 xl:row-span-1 aspect-square xl:aspect-auto'
   },
-  { 
-    id: 5, 
-    src: '/images/gallery_dashboard.jpg', 
+  {
+    id: 5,
+    src: '/images/gallery_dashboard.jpg',
     alt: 'Electric Scooter Dashboard Detail',
     gridClass: 'md:col-span-2 xl:col-span-1 xl:row-span-1 aspect-video xl:aspect-auto'
   }
@@ -67,17 +67,28 @@ export default function Gallery() {
   }, [selectedIndex, nextImage, prevImage]);
 
   return (
-    <section id="gallery" className="py-24 bg-[#050505] relative border-t border-white/5">
+    <section id="gallery" className="py-24 relative border-t border-[rgba(30,50,60,0.08)] dark:border-white/10 overflow-hidden transition-colors duration-700">
+      
+      {/* Dynamic Background Gradients */}
+      {/* Light Theme: Soft Ivory -> Sage -> Mint */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F4F5F0] via-[#E8F0EA] to-[#E7F1EC] dark:hidden -z-20 transition-opacity duration-700" />
+      {/* Dark Theme: Deep Navy -> Indigo -> Royal Blue */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#172554] via-[#1D4ED8] to-[#4C1D95] hidden dark:block -z-20 transition-opacity duration-700" />
+      
+      {/* Rich Glowing Accents */}
+      <div className="absolute top-0 left-1/4 w-[1000px] h-[1000px] bg-[#EAF0F4]/40 dark:bg-[#3730A3]/50 rounded-full blur-[120px] -z-10 pointer-events-none transition-colors" />
+      <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-[#EEF1EC]/50 dark:bg-[#6D28D9]/40 rounded-full blur-[100px] -z-10 pointer-events-none transition-colors" />
+
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 relative z-10">
-        
+
         {/* Editorial Header */}
         <div className="mb-12 md:mb-16 flex flex-col items-start md:flex-row md:items-end justify-between gap-4">
           <div>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-5xl font-medium tracking-tight text-white mb-2"
+              className="text-3xl md:text-5xl font-medium tracking-tight text-[#182333] dark:text-white mb-2 transition-colors"
             >
               Editorial Gallery
             </motion.h2>
@@ -86,16 +97,16 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-white/50 text-sm md:text-base font-light tracking-wide"
+              className="text-[#647078] dark:text-white/50 text-sm md:text-base font-light tracking-wide transition-colors"
             >
               Designed to be seen from every angle.
             </motion.p>
           </div>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[10px] tracking-[0.2em] uppercase text-white/30 hidden md:block"
+            className="text-[10px] tracking-[0.2em] uppercase text-[#899296] dark:text-white/30 hidden md:block transition-colors"
           >
             05 Images
           </motion.div>
@@ -110,7 +121,7 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-              className={`relative group cursor-pointer overflow-hidden rounded-[20px] bg-[#111] border border-white/5 ${img.gridClass}`}
+              className={`relative group cursor-pointer overflow-hidden rounded-[20px] bg-[#F9FAF6] dark:bg-[#111] border border-[rgba(30,50,60,0.07)] dark:border-white/5 shadow-[0_12px_35px_rgba(40,55,60,0.07)] dark:shadow-none hover:shadow-[0_16px_40px_rgba(40,55,60,0.1)] hover:-translate-y-1 transition-all duration-700 ${img.gridClass}`}
               onClick={() => openLightbox(index)}
             >
               <ImageWithFallback
@@ -120,10 +131,10 @@ export default function Gallery() {
                 className="w-full h-full object-cover transition-all duration-[600ms] ease-out group-hover:scale-[1.04] group-hover:brightness-110"
                 loading="lazy"
               />
-              
+
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
-              
+
               {/* Image Counter & View Indicator */}
               <div className="absolute inset-0 p-6 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div className="flex justify-between items-start">

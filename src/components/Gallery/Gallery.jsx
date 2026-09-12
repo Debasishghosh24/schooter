@@ -67,17 +67,14 @@ export default function Gallery() {
   }, [selectedIndex, nextImage, prevImage]);
 
   return (
-    <section id="gallery" className="py-24 relative border-t border-[rgba(30,50,60,0.08)] dark:border-white/10 overflow-hidden transition-colors duration-700">
-      
+    <section id="gallery" className="py-24 relative border-t border-white/5 overflow-hidden transition-colors duration-700 bg-transparent">
+
       {/* Dynamic Background Gradients */}
-      {/* Light Theme: Soft Ivory -> Sage -> Mint */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#F4F5F0] via-[#E8F0EA] to-[#E7F1EC] dark:hidden -z-20 transition-opacity duration-700" />
-      {/* Dark Theme: Deep Navy -> Indigo -> Royal Blue */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#172554] via-[#1D4ED8] to-[#4C1D95] hidden dark:block -z-20 transition-opacity duration-700" />
-      
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F] via-[#0D213F] to-[#122A4E] -z-20 transition-opacity duration-700" />
+
       {/* Rich Glowing Accents */}
-      <div className="absolute top-0 left-1/4 w-[1000px] h-[1000px] bg-[#EAF0F4]/40 dark:bg-[#3730A3]/50 rounded-full blur-[120px] -z-10 pointer-events-none transition-colors" />
-      <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-[#EEF1EC]/50 dark:bg-[#6D28D9]/40 rounded-full blur-[100px] -z-10 pointer-events-none transition-colors" />
+      <div className="absolute top-0 left-1/4 w-[1000px] h-[1000px] bg-[#1688F5]/20 rounded-full blur-[120px] -z-10 pointer-events-none transition-colors" />
+      <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-[#00E5FF]/10 rounded-full blur-[100px] -z-10 pointer-events-none transition-colors" />
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 relative z-10">
 
@@ -88,7 +85,7 @@ export default function Gallery() {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-5xl font-medium tracking-tight text-[#182333] dark:text-white mb-2 transition-colors"
+              className="text-3xl md:text-5xl font-medium tracking-tight text-white mb-2 transition-colors"
             >
               Editorial Gallery
             </motion.h2>
@@ -97,7 +94,7 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-[#647078] dark:text-white/50 text-sm md:text-base font-light tracking-wide transition-colors"
+              className="text-white/50 text-sm md:text-base font-light tracking-wide transition-colors"
             >
               Designed to be seen from every angle.
             </motion.p>
@@ -106,7 +103,7 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[10px] tracking-[0.2em] uppercase text-[#899296] dark:text-white/30 hidden md:block transition-colors"
+            className="text-[10px] tracking-[0.2em] uppercase text-white/30 hidden md:block transition-colors"
           >
             05 Images
           </motion.div>
@@ -121,27 +118,27 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-              className={`relative group cursor-pointer overflow-hidden rounded-[20px] bg-[#F9FAF6] dark:bg-[#111] border border-[rgba(30,50,60,0.07)] dark:border-white/5 shadow-[0_12px_35px_rgba(40,55,60,0.07)] dark:shadow-none hover:shadow-[0_16px_40px_rgba(40,55,60,0.1)] hover:-translate-y-1 transition-all duration-700 ${img.gridClass}`}
+              className={`relative group cursor-pointer overflow-hidden rounded-[20px] glass-card hover:-translate-y-1 transition-all duration-700 ${img.gridClass}`}
               onClick={() => openLightbox(index)}
             >
               <ImageWithFallback
                 src={img.src}
                 fallbackSrc="/images/hero_scooter.jpg"
                 alt={img.alt}
-                className="w-full h-full object-cover transition-all duration-[600ms] ease-out group-hover:scale-[1.04] group-hover:brightness-110"
+                className="w-full h-full object-cover transition-all duration-[600ms] ease-out group-hover:scale-[1.04] opacity-90 group-hover:opacity-100 mix-blend-screen"
                 loading="lazy"
               />
 
               {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
 
               {/* Image Counter & View Indicator */}
               <div className="absolute inset-0 p-6 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div className="flex justify-between items-start">
-                  <span className="text-xs font-medium text-white drop-shadow-md">
+                  <span className="text-xs font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     0{index + 1} / 05
                   </span>
-                  <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white border border-white/20 transform translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500">
+                  <div className="w-10 h-10 rounded-full bg-[#0A192F]/60 backdrop-blur-md flex items-center justify-center text-ev-cyan border border-ev-cyan/30 transform translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500 shadow-[0_0_15px_rgba(0,229,255,0.2)]">
                     <ArrowUpRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -158,16 +155,16 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A192F]/95 backdrop-blur-xl"
           >
             {/* Controls Header */}
             <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50">
-              <span className="text-sm font-medium tracking-[0.2em] text-white/50">
+              <span className="text-sm font-medium tracking-[0.2em] text-ev-cyan/50">
                 0{selectedIndex + 1} / 0{galleryImages.length}
               </span>
               <button
                 onClick={closeLightbox}
-                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+                className="w-12 h-12 rounded-full border border-ev-cyan/30 bg-ev-cyan/5 flex items-center justify-center text-ev-cyan hover:bg-ev-cyan hover:text-[#0A192F] transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -183,7 +180,7 @@ export default function Gallery() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 src={galleryImages[selectedIndex].src}
                 alt={galleryImages[selectedIndex].alt}
-                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                className="max-w-full max-h-full object-contain rounded-lg shadow-[0_0_50px_rgba(0,229,255,0.1)]"
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
@@ -191,13 +188,13 @@ export default function Gallery() {
             {/* Navigation Arrows */}
             <button
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors z-50"
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border border-ev-cyan/30 bg-ev-cyan/5 flex items-center justify-center text-ev-cyan hover:bg-ev-cyan hover:text-[#0A192F] transition-colors z-50"
             >
               <ChevronLeft className="w-8 h-8 mr-1" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors z-50"
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border border-ev-cyan/30 bg-ev-cyan/5 flex items-center justify-center text-ev-cyan hover:bg-ev-cyan hover:text-[#0A192F] transition-colors z-50"
             >
               <ChevronRight className="w-8 h-8 ml-1" />
             </button>

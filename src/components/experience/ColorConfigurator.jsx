@@ -16,7 +16,7 @@ export default function ColorConfigurator({ colors, activeColor, onSelect }) {
               {color.name}
             </span>
             <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${activeColor.id === color.id ? 'border border-white/50 scale-110' : 'border border-transparent'}`}>
-              <div 
+              <div
                 className="w-6 h-6 rounded-full shadow-inner border border-white/10"
                 style={{ backgroundColor: color.cssFilter.includes('hue-rotate') || color.id === 'white' ? color.id === 'white' ? '#FFFFFF' : color.id === 'black' ? '#111111' : color.id === 'blue' ? '#0071E3' : '#CC0000' : '#333' }}
               />

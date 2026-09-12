@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const stats = [
   { value: '150', suffix: '+', label: 'KM RANGE' },
@@ -13,26 +13,26 @@ function AnimatedCounter({ value, suffix }) {
   // For simplicity and performance, we'll use a staggered fade up for the number itself,
   // or a lightweight CSS approach. Here we just display it with Framer Motion.
   return (
-    <div className="flex items-baseline justify-center">
+    <div className="flex items-baseline justify-center text-white">
       <span className="text-6xl md:text-8xl font-medium tracking-tighter">{value}</span>
-      <span className="text-2xl md:text-4xl text-ev-accent ml-1 font-semibold">{suffix}</span>
+      <span className="text-2xl md:text-4xl text-[#38BDF8] ml-1 font-semibold">{suffix}</span>
     </div>
   );
 }
 
 export default function Performance() {
   return (
-    <section className="py-24 bg-ev-dark relative overflow-hidden">
+    <section className="py-24 bg-transparent relative overflow-hidden">
       
       {/* Background Parallax Image */}
-      <div className="absolute inset-0 z-0 opacity-30 mix-blend-screen">
+      <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen">
         <img 
           src="https://images.unsplash.com/photo-1558981852-426c6c22a060?q=80&w=2938&auto=format&fit=crop" 
           alt="Performance Background" 
           loading="lazy"
           className="w-full h-full object-cover grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ev-dark via-transparent to-ev-dark" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#071A2B] via-[#102A43]/50 to-[#071A2B]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -47,7 +47,7 @@ export default function Performance() {
               className="flex flex-col items-center text-center"
             >
               <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-              <p className="mt-4 text-sm md:text-base font-semibold tracking-widest text-white/50 uppercase">
+              <p className="mt-4 text-sm md:text-base font-semibold tracking-widest text-[rgba(240,248,252,0.60)] uppercase">
                 {stat.label}
               </p>
             </motion.div>

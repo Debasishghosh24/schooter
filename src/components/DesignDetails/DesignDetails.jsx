@@ -12,14 +12,14 @@ export default function DesignDetails() {
   const [activeHotspot, setActiveHotspot] = useState(null);
 
   return (
-    <section className="py-24 bg-ev-darker relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-24 bg-transparent relative overflow-hidden transition-colors duration-700">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-medium tracking-tight mb-4"
+            className="text-4xl md:text-5xl font-medium tracking-tight mb-4 text-[#F8FBFF]"
           >
             Obsessive Detail
           </motion.h2>
@@ -31,7 +31,7 @@ export default function DesignDetails() {
             alt="Scooter Details"
             className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen"
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-[#071A2B]/40" />
 
           {/* Hotspots */}
           {details.map((detail) => (
@@ -44,13 +44,13 @@ export default function DesignDetails() {
               onClick={() => setActiveHotspot(activeHotspot === detail.id ? null : detail.id)}
             >
               <button 
-                className="w-8 h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border border-white/40 rounded-full flex items-center justify-center relative cursor-pointer group"
+                className="w-8 h-8 md:w-10 md:h-10 bg-[#38BDF8]/10 backdrop-blur-md border border-[#38BDF8]/40 rounded-full flex items-center justify-center relative cursor-pointer group hover:bg-[#38BDF8]/20 transition-colors"
                 aria-label={detail.title}
               >
-                <div className="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full transition-transform group-hover:scale-150" />
+                <div className="w-2 h-2 md:w-3 md:h-3 bg-[#38BDF8] rounded-full transition-transform group-hover:scale-150" />
                 
                 {/* Ping animation */}
-                <div className="absolute inset-0 rounded-full bg-white/20 animate-ping" />
+                <div className="absolute inset-0 rounded-full bg-[#38BDF8]/20 animate-ping" />
               </button>
 
               {/* Tooltip */}
@@ -63,7 +63,7 @@ export default function DesignDetails() {
                     className="absolute top-12 left-1/2 -translate-x-1/2 glass px-5 py-4 rounded-2xl w-48 md:w-64 pointer-events-none"
                   >
                     <h4 className="text-white font-semibold text-sm md:text-base mb-1">{detail.title}</h4>
-                    <p className="text-white/60 text-xs md:text-sm">{detail.desc}</p>
+                    <p className="text-[rgba(240,248,252,0.60)] text-xs md:text-sm">{detail.desc}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

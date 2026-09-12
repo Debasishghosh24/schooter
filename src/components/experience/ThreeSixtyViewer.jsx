@@ -104,7 +104,7 @@ export default function ThreeSixtyViewer({
       {/* Image Container */}
       <div className="relative w-full max-w-[1000px] h-full flex items-center justify-center z-10 pointer-events-none">
         {isEnabled && loadedImages < totalFrames && (
-            <div className="absolute top-4 right-4 text-[10px] tracking-widest font-bold text-[#182333] dark:text-white z-30 opacity-50 uppercase">
+            <div className="absolute top-4 right-4 text-[10px] tracking-widest font-bold text-[rgba(240,248,252,0.60)] z-30 opacity-50 uppercase">
                 LOADING 360°...
             </div>
         )}
@@ -131,9 +131,9 @@ export default function ThreeSixtyViewer({
 
       {/* Drag Indicator Label */}
       <div className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center z-0 transition-opacity duration-1000 ${hasInteracted ? 'opacity-0' : 'opacity-50'}`}>
-        <span className="text-[10px] tracking-[0.3em] text-[#182333] dark:text-white uppercase font-bold text-center">360°</span>
-        <span className="text-[10px] tracking-[0.3em] text-[#182333] dark:text-white uppercase text-center mt-1">Drag to Rotate</span>
-        <div className="w-12 h-[1px] bg-[#182333]/20 dark:bg-white/20 mt-3" />
+        <span className="text-[10px] tracking-[0.3em] text-white uppercase font-bold text-center">360°</span>
+        <span className="text-[10px] tracking-[0.3em] text-white uppercase text-center mt-1">Drag to Rotate</span>
+        <div className="w-12 h-[1px] bg-white/20 mt-3" />
       </div>
     </div>
   );

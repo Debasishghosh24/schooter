@@ -76,15 +76,15 @@ export default function VideoStory() {
   };
 
   return (
-    <section ref={containerRef} className="py-24 bg-[#0a0a0a] border-t border-white/5 relative overflow-hidden">
+    <section ref={containerRef} className="py-24 bg-transparent border-t border-white/5 relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden bg-[#111] border border-white/10 group shadow-2xl"
+          className="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden glass-card shadow-[0_0_40px_rgba(0,229,255,0.15)] group"
         >
           {/* Background Video / Fallback Image */}
           {!videoError ? (
@@ -108,15 +108,15 @@ export default function VideoStory() {
           )}
 
           {/* Dark Gradients for Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 via-[#0A192F]/20 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A192F]/60 via-transparent to-[#0A192F]/60 pointer-events-none" />
 
           {/* Overlay Content */}
           <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-between p-8 md:p-16">
-            
+
             {/* Left Text */}
             <div className="w-full md:w-1/3 text-left">
-              <motion.h2 
+              <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -125,10 +125,10 @@ export default function VideoStory() {
                 A Smarter <br /> Way to Move
               </motion.h2>
             </div>
-            
+
             {/* Center Play Button */}
             <div className="w-full md:w-1/3 flex justify-center my-8 md:my-0">
-              <motion.button 
+              <motion.button
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
@@ -137,10 +137,10 @@ export default function VideoStory() {
                 onClick={handleOpenModal}
                 className="flex flex-col items-center gap-4 cursor-pointer group/btn"
               >
-                <div className="w-20 h-20 rounded-full border border-white/40 flex items-center justify-center text-white bg-black/40 backdrop-blur-md group-hover/btn:bg-white group-hover/btn:text-black transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                <div className="w-20 h-20 rounded-full border border-ev-cyan/40 flex items-center justify-center text-ev-cyan bg-ev-cyan/10 backdrop-blur-md group-hover/btn:bg-ev-cyan group-hover/btn:text-[#0A192F] transition-all duration-300 shadow-[0_0_30px_rgba(0,229,255,0.2)]">
                   <Play className="w-8 h-8 ml-1" />
                 </div>
-                <span className="text-xs tracking-[0.2em] font-medium text-white uppercase group-hover/btn:text-white/80 transition-colors">
+                <span className="text-xs tracking-[0.2em] font-medium text-ev-cyan uppercase group-hover/btn:text-white transition-colors">
                   Watch Our Story
                 </span>
               </motion.button>
@@ -148,7 +148,7 @@ export default function VideoStory() {
 
             {/* Right Text */}
             <div className="w-full md:w-1/3 flex justify-end">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -171,20 +171,20 @@ export default function VideoStory() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black backdrop-blur-xl"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A192F]/90 backdrop-blur-xl"
             onClick={handleCloseModal}
           >
             {/* Close Button */}
             <button
               onClick={handleCloseModal}
-              className="absolute top-6 right-6 z-50 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+              className="absolute top-6 right-6 z-50 w-12 h-12 rounded-full border border-ev-cyan/40 bg-ev-cyan/10 flex items-center justify-center text-ev-cyan hover:bg-ev-cyan hover:text-[#0A192F] transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
 
             {/* Video Container */}
-            <div 
-              className="relative w-full max-w-7xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl"
+            <div
+              className="relative w-full max-w-7xl aspect-video glass-card rounded-xl overflow-hidden shadow-[0_0_40px_rgba(0,229,255,0.2)]"
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking video
             >
               {!videoError ? (
@@ -207,19 +207,19 @@ export default function VideoStory() {
                   className="w-full h-full object-cover"
                 />
               )}
-              
+
               {/* Custom Controls Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent flex items-center justify-between opacity-0 hover:opacity-100 transition-opacity duration-300">
-                <button onClick={togglePlayModal} className="text-white hover:text-ev-accent transition-colors p-2">
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#0A192F]/90 to-transparent flex items-center justify-between opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <button onClick={togglePlayModal} className="text-ev-cyan hover:text-white transition-colors p-2">
                   {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
                 </button>
                 <div className="flex-1 px-4">
                   {/* Pseudo progress bar */}
-                  <div className="h-1 w-full bg-white/20 rounded-full overflow-hidden">
-                    <div className="h-full bg-white w-1/3 rounded-full" />
+                  <div className="h-1 w-full bg-ev-cyan/20 rounded-full overflow-hidden">
+                    <div className="h-full bg-ev-cyan w-1/3 rounded-full shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
                   </div>
                 </div>
-                <button onClick={toggleMuteModal} className="text-white hover:text-ev-accent transition-colors p-2">
+                <button onClick={toggleMuteModal} className="text-ev-cyan hover:text-white transition-colors p-2">
                   {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
                 </button>
               </div>

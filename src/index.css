@@ -1,39 +1,47 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ev-dark: #0A192F;
-  --color-ev-darker: #061121;
-  --color-ev-light: #E6F1FF;
-  --color-ev-accent: #1688F5;
-  --color-ev-cyan: #00E5FF;
+  --color-brand-light: #F7F8F5;
+  --color-brand-ivory: #FFFFFF;
+  --color-brand-surface: #EEF5F3;
+  --color-brand-blue-soft: #EAF3FA;
+  --color-brand-blue-light: #DCEEFF;
+  --color-brand-green: #00C853;
+  --color-brand-text: #1A1F26;
+  --color-brand-text-muted: #5A6472;
 }
 
 @layer base {
   body {
-    @apply antialiased text-white bg-ev-darker;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    @apply antialiased text-brand-text bg-brand-light min-h-screen;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Soft premium gradient background */
+    background: radial-gradient(circle at 15% 50%, rgba(220, 238, 255, 0.6), transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(238, 245, 243, 0.8), transparent 40%),
+                linear-gradient(135deg, #F7F8F5 0%, #FFFFFF 100%);
+    background-attachment: fixed;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-md border border-ev-cyan/20;
+    @apply bg-white/70 backdrop-blur-md border border-white shadow-sm;
   }
 
   .glass-card {
-    @apply bg-[#0A192F]/80 backdrop-blur-lg border border-ev-cyan/20 rounded-2xl shadow-[0_8px_32px_rgba(0,229,255,0.05)];
+    @apply bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-text to-brand-text-muted;
   }
   
   .btn-primary {
-    @apply bg-ev-accent text-white rounded-full font-semibold hover:bg-[#1A9FFF] transition-colors shadow-[0_4px_15px_rgba(22,136,245,0.4)];
+    @apply bg-brand-text text-white rounded-full font-semibold hover:bg-black transition-colors shadow-md;
   }
 
   .btn-secondary {
-    @apply bg-white/5 backdrop-blur-md border border-ev-cyan/20 text-white rounded-full font-semibold hover:bg-white/10 transition-colors hover:border-ev-cyan/40;
+    @apply bg-white border border-gray-200 text-brand-text rounded-full font-semibold hover:bg-gray-50 transition-colors shadow-sm;
   }
 
   .hide-scrollbar::-webkit-scrollbar {

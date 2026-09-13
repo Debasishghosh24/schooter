@@ -61,10 +61,7 @@ export default function Gallery() {
   }, [selectedIndex, nextImage, prevImage]);
 
   return (
-    <section id="gallery" className="py-24 relative border-t border-white/5 overflow-hidden transition-colors duration-700 bg-transparent">
-
-      {/* Dynamic Background Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F] via-[#0A192F] to-[#0A192F] -z-20 transition-opacity duration-700" />
+    <section id="gallery" className="py-24 relative overflow-hidden bg-white border-t border-gray-100">
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 relative z-10">
 
@@ -75,15 +72,15 @@ export default function Gallery() {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-white/60 text-xs tracking-[0.2em] uppercase font-semibold mb-4 drop-shadow-md"
+              className="text-brand-green text-xs tracking-[0.2em] uppercase font-bold mb-4"
             >
-              EDITORIAL GALLERY
+              Editorial Gallery
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-5xl font-semibold tracking-tight text-white mb-2"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-brand-text mb-2"
             >
               A Closer Look At A <br /> Brighter Tomorrow.
             </motion.h2>
@@ -94,10 +91,10 @@ export default function Gallery() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             href="#gallery"
-            className="group flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white transition-colors border-b border-white/20 hover:border-white pb-1"
+            className="group flex items-center gap-2 text-sm font-semibold text-brand-green hover:text-brand-text transition-colors border-b border-brand-green/20 hover:border-brand-text pb-1"
           >
-            View Gallery
-            <ArrowUpRight className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+            View Full Gallery
+            <ArrowUpRight className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
           </motion.a>
         </div>
 
@@ -110,30 +107,28 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-              className="relative group cursor-pointer overflow-hidden rounded-[24px] glass-card hover:-translate-y-2 transition-all duration-500 h-[350px] xl:h-auto"
+              className="relative group cursor-pointer overflow-hidden rounded-3xl bg-brand-light hover:-translate-y-2 hover:shadow-xl transition-all duration-500 h-[350px] xl:h-auto border border-gray-100"
               onClick={() => openLightbox(index)}
             >
+              <div className="absolute inset-0 bg-brand-text/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <ImageWithFallback
                 src={img.src}
                 fallbackSrc="/images/hero_scooter.jpg"
                 alt={img.alt}
-                className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.05] opacity-80 group-hover:opacity-100 mix-blend-screen"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy"
               />
 
-              {/* Gradients */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-transparent to-transparent pointer-events-none opacity-80" />
-
               {/* Title and Counter at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col justify-end pointer-events-none">
-                <span className="text-white font-semibold text-xl mb-1">{img.title}</span>
-                <span className="text-[10px] tracking-[0.2em] font-bold text-white/50 uppercase">
+              <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col justify-end pointer-events-none z-20 bg-gradient-to-t from-black/60 to-transparent">
+                <span className="text-white font-bold text-xl mb-1">{img.title}</span>
+                <span className="text-[10px] tracking-[0.2em] font-bold text-white/70 uppercase">
                   0{index + 1}
                 </span>
               </div>
               
               {/* Top Right Arrow on hover */}
-              <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center text-brand-text opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 z-20">
                 <ArrowUpRight className="w-5 h-5" />
               </div>
             </motion.div>
@@ -148,16 +143,16 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A192F]/95 backdrop-blur-xl"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-white/95 backdrop-blur-xl"
           >
             {/* Controls Header */}
             <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50">
-              <span className="text-sm font-medium tracking-[0.2em] text-ev-cyan/50">
+              <span className="text-sm font-bold tracking-[0.2em] text-brand-text">
                 0{selectedIndex + 1} / 0{galleryImages.length}
               </span>
               <button
                 onClick={closeLightbox}
-                className="w-12 h-12 rounded-full border border-ev-cyan/30 bg-ev-cyan/5 flex items-center justify-center text-ev-cyan hover:bg-ev-cyan hover:text-[#0A192F] transition-colors"
+                className="w-12 h-12 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center text-brand-text hover:bg-gray-50 transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -173,7 +168,7 @@ export default function Gallery() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 src={galleryImages[selectedIndex].src}
                 alt={galleryImages[selectedIndex].alt}
-                className="max-w-full max-h-full object-contain rounded-lg shadow-[0_0_50px_rgba(0,229,255,0.1)]"
+                className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
@@ -181,13 +176,13 @@ export default function Gallery() {
             {/* Navigation Arrows */}
             <button
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border border-ev-cyan/30 bg-ev-cyan/5 flex items-center justify-center text-ev-cyan hover:bg-ev-cyan hover:text-[#0A192F] transition-colors z-50"
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center text-brand-text hover:bg-gray-50 transition-colors z-50"
             >
               <ChevronLeft className="w-8 h-8 mr-1" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border border-ev-cyan/30 bg-ev-cyan/5 flex items-center justify-center text-ev-cyan hover:bg-ev-cyan hover:text-[#0A192F] transition-colors z-50"
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border border-gray-200 bg-white shadow-sm flex items-center justify-center text-brand-text hover:bg-gray-50 transition-colors z-50"
             >
               <ChevronRight className="w-8 h-8 ml-1" />
             </button>

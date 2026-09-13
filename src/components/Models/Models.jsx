@@ -1,76 +1,73 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Battery, Clock, Zap, Gauge, Users } from 'lucide-react';
 import { scooters } from '../../data/scooters';
 import ImageWithFallback from '../common/ImageWithFallback';
 
-const categories = ['All', 'City', 'Performance', 'Premium', 'Long Range'];
+const categories = ['All Models', 'City', 'Performance', 'High Range'];
 
 export default function Models() {
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState('All Models');
 
-  const filteredScooters = activeCategory === 'All'
+  const filteredScooters = activeCategory === 'All Models'
     ? scooters
     : scooters.filter(s => s.category === activeCategory);
 
   return (
-    <section id="models" className="py-24 bg-transparent relative border-t border-white/5 transition-colors duration-700">
-      <div className="max-w-[1400px] mx-auto px-6">
+    <section id="models" className="py-24 bg-brand-light relative border-t border-gray-200">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
 
-        <div className="flex flex-col md:flex-row md:items-start justify-between mb-12">
-          <div>
+        <div className="flex flex-col xl:flex-row xl:items-start justify-between mb-16">
+          <div className="max-w-2xl">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-white/50 text-xs tracking-[0.2em] uppercase font-semibold mb-2 transition-colors"
+              className="text-brand-green text-xs tracking-[0.2em] uppercase font-bold mb-4"
             >
-              OUR MODELS
+              Our Scooters
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-semibold tracking-tight text-white transition-colors mb-2"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-brand-text mb-4 leading-tight"
             >
-              Find Your Perfect Ride
+              Electric Scooters for a Cleaner India
             </motion.h2>
-            <p className="text-white/40 text-sm mt-1 mb-6 transition-colors">Different journeys. A cleaner tomorrow.</p>
+            <p className="text-brand-text-muted text-lg font-medium tracking-wide">Premium design meets intelligent technology.</p>
           </div>
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-6 mt-4 md:mt-6"
+            className="flex items-center gap-6 mt-8 xl:mt-0"
           >
-            <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-2 md:pb-0">
+            <div className="flex gap-3 overflow-x-auto hide-scrollbar pb-4 xl:pb-0">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-colors border ${activeCategory === cat
-                      ? 'bg-white text-[#0A192F] border-white'
-                      : 'bg-transparent text-white/60 border-white/20 hover:border-white/50 hover:text-white'
+                  className={`px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all border shadow-sm ${activeCategory === cat
+                      ? 'bg-brand-text text-white border-brand-text'
+                      : 'bg-white text-brand-text-muted border-gray-200 hover:border-gray-300 hover:text-brand-text'
                     }`}
                 >
                   {cat}
                 </button>
               ))}
-              <button className="px-5 py-2 rounded-full text-xs font-semibold whitespace-nowrap text-white hover:text-ev-cyan transition-colors flex items-center gap-1 ml-4">
-                View All <ArrowRight className="w-3 h-3" />
-              </button>
             </div>
           </motion.div>
         </div>
 
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredScooters.map((scooter, idx) => (
+            {filteredScooters.map((scooter) => (
               <motion.div
                 layout
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -78,61 +75,62 @@ export default function Models() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
                 key={scooter.id}
-                className={`group relative overflow-hidden glass-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between ${scooter.name === 'AERO V1 Lite' ? 'ring-1 ring-ev-cyan/40 shadow-[0_8px_32px_rgba(0,229,255,0.15)] bg-[#1688F5]/10' : ''
-                  }`}
+                className={`group relative overflow-hidden glass-card flex flex-col justify-between`}
               >
-                {scooter.name === 'AERO V1 Lite' && (
-                  <div className="absolute top-4 right-4 bg-ev-accent text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10 shadow-sm">
-                    Most Popular
-                  </div>
-                )}
                 {/* Scooter Image Container */}
-                <div className="aspect-[4/3] w-full p-8 flex items-center justify-center bg-transparent overflow-hidden transition-colors duration-700">
+                <div className="aspect-[4/3] w-full p-6 flex flex-col items-center justify-center bg-transparent overflow-hidden">
                   <ImageWithFallback
                     src={scooter.image}
                     fallbackSrc="/images/scooter_white.jpg"
                     alt={scooter.name}
-                    className="w-full h-full object-contain mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out"
                     style={{ filter: scooter.cssFilter }}
                   />
                 </div>
+                
+                <div className="px-6 pb-2 text-center w-full">
+                  <h3 className="text-2xl font-bold tracking-tight text-brand-text group-hover:text-brand-green transition-colors">
+                    {scooter.name}
+                  </h3>
+                  <p className="text-brand-text-muted text-xs mt-1 font-bold uppercase tracking-wider">{scooter.description}</p>
+                </div>
 
-                {/* Details Container */}
-                <div className="p-6 pt-2 flex flex-col justify-between flex-1 z-10">
+                <div className="grid grid-cols-2 gap-4 px-6 py-4 mt-2">
+                  <div className="flex flex-col items-center text-center">
+                    <Battery className="w-4 h-4 text-brand-green mb-1" />
+                    <span className="text-sm font-semibold text-brand-text">{scooter.battery}</span>
+                    <span className="text-[10px] text-brand-text-muted uppercase tracking-wider">Battery</span>
+                  </div>
+                  <div className="flex flex-col items-center text-center">
+                    <Zap className="w-4 h-4 text-brand-green mb-1" />
+                    <span className="text-sm font-semibold text-brand-text">{scooter.range}</span>
+                    <span className="text-[10px] text-brand-text-muted uppercase tracking-wider">Range</span>
+                  </div>
+                  <div className="flex flex-col items-center text-center">
+                    <Gauge className="w-4 h-4 text-brand-green mb-1" />
+                    <span className="text-sm font-semibold text-brand-text">{scooter.topSpeed}</span>
+                    <span className="text-[10px] text-brand-text-muted uppercase tracking-wider">Top Speed</span>
+                  </div>
+                  <div className="flex flex-col items-center text-center">
+                    <Clock className="w-4 h-4 text-brand-green mb-1" />
+                    <span className="text-sm font-semibold text-brand-text">{scooter.chargingTime}</span>
+                    <span className="text-[10px] text-brand-text-muted uppercase tracking-wider">Charge Time</span>
+                  </div>
+                </div>
+
+                {/* Bottom Price Container */}
+                <div className="px-6 py-5 border-t border-gray-100 flex justify-between items-center bg-gray-50/50">
                   <div>
-                    <h3 className="text-xl font-bold tracking-tight text-white group-hover:text-ev-cyan transition-colors">
-                      {scooter.name}
-                    </h3>
-                    <p className="text-white/50 text-xs mt-1 mb-6 font-medium transition-colors">{scooter.description}</p>
+                    <p className="text-brand-text-muted text-[10px] font-bold uppercase tracking-wider mb-0.5">Starting at</p>
+                    <p className="font-bold text-xl text-brand-text">{scooter.price}</p>
+                  </div>
 
-                    <div className="flex justify-between items-end">
-                      <div className="flex gap-6">
-                        <div>
-                          <p className="font-bold text-sm text-white transition-colors">{scooter.range}</p>
-                          <p className="text-white/40 text-[10px] font-semibold uppercase tracking-wider transition-colors">Range</p>
-                        </div>
-                        <div>
-                          <p className="font-bold text-sm text-white transition-colors">{scooter.topSpeed}</p>
-                          <p className="text-white/40 text-[10px] font-semibold uppercase tracking-wider transition-colors">Top Speed</p>
-                        </div>
-                      </div>
-
-                      <button className="w-8 h-8 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white group-hover:bg-ev-accent group-hover:border-transparent transition-all">
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
+                  <button className="flex items-center gap-2 text-sm font-semibold text-brand-text hover:text-brand-green transition-colors group/btn">
+                    Explore
+                    <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center group-hover/btn:bg-brand-green group-hover/btn:text-white group-hover/btn:border-brand-green transition-all shadow-sm">
+                      <ArrowRight className="w-4 h-4" />
                     </div>
-                  </div>
-
-                  {/* Colors */}
-                  <div className="flex gap-2 mt-6">
-                    {scooter.colors && scooter.colors.map((color, i) => (
-                      <div
-                        key={i}
-                        className={`w-3 h-3 rounded-full border border-white/20 ${i === 2 && scooter.name === 'AERO V1 Lite' ? 'ring-1 ring-offset-2 ring-offset-[#0A192F] ring-white' : ''}`}
-                        style={{ backgroundColor: color }}
-                      />
-                    ))}
-                  </div>
+                  </button>
                 </div>
               </motion.div>
             ))}

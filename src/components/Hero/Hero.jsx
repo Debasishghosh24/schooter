@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Zap, Battery, Clock, Gauge } from 'lucide-react';
 
 const stats = [
@@ -9,7 +9,24 @@ const stats = [
   { icon: <Clock className="w-5 h-5 text-brand-green" />, label: '4-5 HRS', sub: 'Charging' },
 ];
 
+const carouselImages = [
+  '/images/carousel/img1.png',
+  '/images/carousel/img2.png',
+  '/images/carousel/img3.png',
+  '/images/carousel/img4.png'
+];
+
 export default function Hero({ onBookTestRide }) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+    }, 3000); // 10 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative h-screen min-h-[800px] w-full flex items-center justify-center overflow-hidden bg-brand-light">
 
@@ -24,11 +41,18 @@ export default function Hero({ onBookTestRide }) {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent z-10 w-full md:w-[60%]" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-light via-transparent to-transparent z-10 opacity-70" />
 
-        <img
-          src="/images/hero_scooter.jpg"
-          alt="ZapOrbit Scooters Premium"
-          className="w-full h-full object-cover object-center"
-        />
+        <AnimatePresence>
+          <motion.img
+            key={currentImageIndex}
+            src={carouselImages[currentImageIndex]}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            alt={`ZapOrbit Scooters Premium ${currentImageIndex + 1}`}
+            className="w-full h-full object-cover object-center absolute inset-0"
+          />
+        </AnimatePresence>
       </motion.div>
 
       <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12 w-full flex flex-col items-start justify-center h-full pt-20">
@@ -89,25 +113,25 @@ export default function Hero({ onBookTestRide }) {
         className="absolute bottom-10 left-6 right-6 lg:left-12 lg:right-12 z-30 hidden md:block"
       >
         <div className="max-w-[1600px] mx-auto">
-           <div className="glass-card max-w-4xl px-8 py-6 flex justify-between items-center rounded-2xl mx-auto md:mx-0">
-             {stats.map((stat, i) => (
-               <div key={i} className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-brand-surface flex items-center justify-center">
-                   {stat.icon}
-                 </div>
-                 <div className="flex flex-col">
-                   <span className="text-xl font-bold text-brand-text">{stat.label}</span>
-                   <span className="text-xs text-brand-text-muted font-medium uppercase tracking-wider">{stat.sub}</span>
-                 </div>
-                 {i < stats.length - 1 && (
-                   <div className="w-[1px] h-10 bg-gray-200 ml-8"></div>
-                 )}
-               </div>
-             ))}
-           </div>
+          <div className="glass-card max-w-4xl px-8 py-6 flex justify-between items-center rounded-2xl mx-auto md:mx-0">
+            {stats.map((stat, i) => (
+              <div key={i} className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-brand-surface flex items-center justify-center">
+                  {stat.icon}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xl font-bold text-brand-text">{stat.label}</span>
+                  <span className="text-xs text-brand-text-muted font-medium uppercase tracking-wider">{stat.sub}</span>
+                </div>
+                {i < stats.length - 1 && (
+                  <div className="w-[1px] h-10 bg-gray-200 ml-8"></div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
-      
+
     </section>
   );
 }

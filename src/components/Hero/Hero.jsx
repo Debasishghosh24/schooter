@@ -64,7 +64,7 @@ export default function Hero({ onBookTestRide }) {
         </AnimatePresence>
       </motion.div>
 
-      <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12 w-full flex flex-col items-start justify-center h-full pt-8 pb-52 md:pb-0">
+      <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12 w-full flex flex-col items-start justify-center h-full pt-8 pb-52 md:pb-20">
 
         {/* Left Content */}
         <div className="w-full md:w-[60%] flex flex-col items-start space-y-6 z-30 mt-16 md:mt-0">

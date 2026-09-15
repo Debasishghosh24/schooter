@@ -23,7 +23,7 @@ export default function Hero({ onBookTestRide }) {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
-    }, 3000); // 10 seconds
+    }, 10000); // 10 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -39,6 +39,7 @@ export default function Hero({ onBookTestRide }) {
         className="absolute inset-0 z-0"
       >
         {/* Gradients tailored to ensure text legibility on the left, without washing out the scooter */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/60 to-transparent z-10 md:hidden h-[70%]" />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent z-10 hidden md:block md:w-[60%]" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-light via-transparent to-transparent z-10 opacity-70" />
 
@@ -63,7 +64,7 @@ export default function Hero({ onBookTestRide }) {
         </AnimatePresence>
       </motion.div>
 
-      <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12 w-full flex flex-col items-start justify-center h-full pt-20">
+      <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12 w-full flex flex-col items-start justify-center h-full pt-8 pb-52 md:pb-0">
 
         {/* Left Content */}
         <div className="w-full md:w-[60%] flex flex-col items-start space-y-6 z-30 mt-16 md:mt-0">
@@ -71,7 +72,7 @@ export default function Hero({ onBookTestRide }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-brand-text-muted text-sm font-bold tracking-[0.1em] uppercase flex items-center gap-2"
+            className="text-black md:text-brand-text-muted text-sm font-bold tracking-[0.1em] uppercase flex items-center gap-2"
           >
             <span className="w-8 h-[2px] bg-brand-green"></span>
             ELECTRIC MOBILITY, REFINED
@@ -81,7 +82,7 @@ export default function Hero({ onBookTestRide }) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 1 }}
-            className="text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tighter text-brand-text leading-[1.05]"
+            className="text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tighter text-black md:text-brand-text leading-[1.05]"
           >
             Ride Beyond <br />
             The Ordinary.
@@ -91,9 +92,17 @@ export default function Hero({ onBookTestRide }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8 }}
-            className="text-xl md:text-2xl text-brand-text-muted max-w-xl font-light mt-4"
+            className="text-xl md:text-2xl text-black font-medium md:font-light md:text-brand-text-muted max-w-xl mt-4"
           >
             Smart electric mobility engineered for modern India.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
+            className="text-xl md:text-2xl text-black font-medium md:font-light md:text-brand-text-muted max-w-xl mt-4"
+          >
+            Experience smarter rides, effortless performance, and cleaner journeys—designed for the way India moves.
           </motion.p>
 
           <motion.div
@@ -114,31 +123,30 @@ export default function Hero({ onBookTestRide }) {
       </div>
 
       {/* Floating Performance Stats positioned at bottom */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
-        className="absolute bottom-10 left-6 right-6 lg:left-12 lg:right-12 z-30 hidden md:block"
-      >
+      <div className="absolute bottom-6 md:bottom-10 left-4 right-4 md:left-6 md:right-6 lg:left-12 lg:right-12 z-30">
         <div className="max-w-[1600px] mx-auto">
-          <div className="glass-card max-w-4xl px-8 py-6 flex justify-between items-center rounded-2xl mx-auto md:mx-0">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto md:mx-0">
             {stats.map((stat, i) => (
-              <div key={i} className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-brand-surface flex items-center justify-center">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2 + (i * 0.1), duration: 0.8, ease: "easeOut" }}
+                whileHover={{ y: -4, boxShadow: "0 12px 30px rgba(0,0,0,0.08)" }}
+                className="group flex items-center gap-3 p-3 md:p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.03)]"
+              >
+                <div className="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full bg-white/80 shadow-sm flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-shadow duration-300">
                   {stat.icon}
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold text-brand-text">{stat.label}</span>
-                  <span className="text-xs text-brand-text-muted font-medium uppercase tracking-wider">{stat.sub}</span>
+                  <span className="text-base md:text-xl font-bold text-brand-text leading-tight">{stat.label}</span>
+                  <span className="text-[10px] md:text-xs text-brand-text-muted font-bold uppercase tracking-wider mt-0.5">{stat.sub}</span>
                 </div>
-                {i < stats.length - 1 && (
-                  <div className="w-[1px] h-10 bg-gray-200 ml-8"></div>
-                )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
 
     </section>
   );

@@ -4,12 +4,11 @@ import { Menu, X, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const navLinks = [
-  { name: 'Models', href: '#models' },
-  { name: 'Charging', href: '#charging' },
-  { name: 'Technology', href: '#technology' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Gallery', href: '#gallery' },
-  { name: 'Support', href: '#support' },
+  { name: 'Models', path: '/#models' },
+  { name: 'All Models', path: '/all-models' },
+  { name: 'Charging', path: '/#charging' },
+  { name: 'Gallery', path: '/#gallery' },
+  { name: 'Support', path: '/#support' },
 ];
 
 export default function Navbar({ onBookTestRide }) {
@@ -48,13 +47,23 @@ export default function Navbar({ onBookTestRide }) {
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-semibold text-brand-text-muted hover:text-brand-text transition-colors"
-            >
-              {link.name}
-            </a>
+            link.path.startsWith('/#') ? (
+              <a
+                key={link.name}
+                href={link.path}
+                className="text-sm font-semibold text-brand-text-muted hover:text-brand-text transition-colors"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="text-sm font-semibold text-brand-text-muted hover:text-brand-text transition-colors"
+              >
+                {link.name}
+              </Link>
+            )
           ))}
         </nav>
 
@@ -94,19 +103,28 @@ export default function Navbar({ onBookTestRide }) {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-0 bg-white/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center space-y-8"
           >
-            {navLinks.map((link, idx) => (
-               <motion.a
-                key={link.name}
-                href={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-3xl font-semibold text-brand-text tracking-wide hover:text-brand-green transition-colors"
-              >
-                {link.name}
-              </motion.a>
-            ))}
+            {navLinks.map((link, idx) => {
+              const linkProps = {
+                key: link.name,
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                transition: { delay: idx * 0.1 },
+                onClick: () => setIsMobileMenuOpen(false),
+                className: "text-3xl font-semibold text-brand-text tracking-wide hover:text-brand-green transition-colors"
+              };
+
+              return link.path.startsWith('/#') ? (
+                <motion.a href={link.path} {...linkProps}>
+                  {link.name}
+                </motion.a>
+              ) : (
+                <motion.div {...linkProps}>
+                  <Link to={link.path} onClick={() => setIsMobileMenuOpen(false)} className="w-full block">
+                    {link.name}
+                  </Link>
+                </motion.div>
+              );
+            })}
             
             <motion.a
               href="#contact"

@@ -10,10 +10,11 @@ const stats = [
 ];
 
 const carouselImages = [
-  '/images/carousel/img1.png',
-  '/images/carousel/img2.png',
-  '/images/carousel/img3.png',
-  '/images/carousel/img4.png'
+  { desktop: '/images/carousel/img1.png', mobile: '/images/carousel/mobile1.png' },
+  { desktop: '/images/carousel/img2.png', mobile: '/images/carousel/mobile2.png' },
+  { desktop: '/images/carousel/img3.png', mobile: '/images/carousel/mobile3.png' },
+  { desktop: '/images/carousel/img4.png', mobile: '/images/carousel/mobile4.png' },
+  { desktop: '/images/carousel/img5.png', mobile: '/images/carousel/mobile1.png' }
 ];
 
 export default function Hero({ onBookTestRide }) {
@@ -38,20 +39,27 @@ export default function Hero({ onBookTestRide }) {
         className="absolute inset-0 z-0"
       >
         {/* Gradients tailored to ensure text legibility on the left, without washing out the scooter */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent z-10 w-full md:w-[60%]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent z-10 hidden md:block md:w-[60%]" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-light via-transparent to-transparent z-10 opacity-70" />
 
         <AnimatePresence>
-          <motion.img
+          <motion.div
             key={currentImageIndex}
-            src={carouselImages[currentImageIndex]}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            alt={`ZapOrbit Scooters Premium ${currentImageIndex + 1}`}
-            className="w-full h-full object-cover object-center absolute inset-0"
-          />
+            className="absolute inset-0 w-full h-full"
+          >
+            <picture>
+              <source media="(max-width: 768px)" srcSet={carouselImages[currentImageIndex].mobile} />
+              <img
+                src={carouselImages[currentImageIndex].desktop}
+                alt={`ZapOrbit Scooters Premium ${currentImageIndex + 1}`}
+                className="w-full h-full object-cover object-center"
+              />
+            </picture>
+          </motion.div>
         </AnimatePresence>
       </motion.div>
 
@@ -66,7 +74,7 @@ export default function Hero({ onBookTestRide }) {
             className="text-brand-text-muted text-sm font-bold tracking-[0.1em] uppercase flex items-center gap-2"
           >
             <span className="w-8 h-[2px] bg-brand-green"></span>
-            The Future of Urban Mobility
+            ELECTRIC MOBILITY, REFINED
           </motion.p>
 
           <motion.h1
@@ -75,8 +83,8 @@ export default function Hero({ onBookTestRide }) {
             transition={{ delay: 0.7, duration: 1 }}
             className="text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tighter text-brand-text leading-[1.05]"
           >
-            Power Meets <br />
-            <span className="text-brand-green">Elegance.</span>
+            Ride Beyond <br />
+            The Ordinary.
           </motion.h1>
 
           <motion.p
@@ -85,7 +93,7 @@ export default function Hero({ onBookTestRide }) {
             transition={{ delay: 0.9, duration: 0.8 }}
             className="text-xl md:text-2xl text-brand-text-muted max-w-xl font-light mt-4"
           >
-            Experience the ultimate ride with uncompromising range, intelligent features, and a design that turns heads.
+            Smart electric mobility engineered for modern India.
           </motion.p>
 
           <motion.div
@@ -94,11 +102,11 @@ export default function Hero({ onBookTestRide }) {
             transition={{ delay: 1.1, duration: 0.8 }}
             className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6"
           >
-            <button onClick={onBookTestRide} className="btn-primary px-8 py-4 flex items-center justify-center gap-2 text-lg">
+            <a href="#models" className="btn-primary px-8 py-4 flex items-center justify-center gap-2 text-lg">
+              Explore Models
+            </a>
+            <button onClick={onBookTestRide} className="btn-secondary px-8 py-4 flex items-center justify-center gap-2 text-lg">
               Book a Test Ride <ArrowRight className="w-5 h-5" />
-            </button>
-            <button className="btn-secondary px-8 py-4 flex items-center justify-center gap-3 text-lg">
-              Explore Z4 PRO
             </button>
           </motion.div>
         </div>

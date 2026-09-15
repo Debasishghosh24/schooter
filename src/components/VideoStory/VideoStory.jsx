@@ -160,13 +160,6 @@ export default function VideoStory() {
             <span className="text-white font-bold tracking-[0.2em] uppercase text-sm drop-shadow-md">HAPPIER PEOPLE</span>
           </div>
           
-          {/* Bottom Right: Scroll indicator */}
-          <div className="flex flex-col items-center mt-auto">
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1 relative mb-3">
-              <div className="w-1 h-2 bg-white rounded-full animate-bounce" />
-            </div>
-            <span className="text-[9px] text-white/50 tracking-widest uppercase">Scroll to explore</span>
-          </div>
         </div>
 
       </div>

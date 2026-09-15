@@ -3,15 +3,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Battery, Clock, Zap, Gauge, Users } from 'lucide-react';
 import { scooters } from '../../data/scooters';
 import ImageWithFallback from '../common/ImageWithFallback';
+import ModelDetailsModal from './ModelDetailsModal';
+import { Link } from 'react-router-dom';
 
 const categories = ['All Models', 'City', 'Performance', 'High Range'];
 
-export default function Models() {
+export default function Models({ onBookTestRide, limit, showViewAll }) {
   const [activeCategory, setActiveCategory] = useState('All Models');
+  const [selectedScooter, setSelectedScooter] = useState(null);
 
-  const filteredScooters = activeCategory === 'All Models'
+  let filteredScooters = activeCategory === 'All Models'
     ? scooters
     : scooters.filter(s => s.category === activeCategory);
+    
+  if (limit) {
+    filteredScooters = filteredScooters.slice(0, limit);
+  }
 
   return (
     <section id="models" className="py-24 bg-brand-light relative border-t border-gray-200">
@@ -119,14 +126,12 @@ export default function Models() {
                 </div>
 
                 {/* Bottom Price Container */}
-                <div className="px-6 py-5 border-t border-gray-100 flex justify-between items-center bg-gray-50/50">
-                  <div>
-                    <p className="text-brand-text-muted text-[10px] font-bold uppercase tracking-wider mb-0.5">Starting at</p>
-                    <p className="font-bold text-xl text-brand-text">{scooter.price}</p>
-                  </div>
-
-                  <button className="flex items-center gap-2 text-sm font-semibold text-brand-text hover:text-brand-green transition-colors group/btn">
-                    Explore
+                <div className="px-6 py-5 border-t border-gray-100 flex justify-end items-center bg-gray-50/50">
+                  <button 
+                    onClick={() => setSelectedScooter(scooter)}
+                    className="flex items-center gap-2 text-sm font-semibold text-brand-text hover:text-brand-green transition-colors group/btn"
+                  >
+                    View Details
                     <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center group-hover/btn:bg-brand-green group-hover/btn:text-white group-hover/btn:border-brand-green transition-all shadow-sm">
                       <ArrowRight className="w-4 h-4" />
                     </div>
@@ -136,7 +141,22 @@ export default function Models() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {showViewAll && (
+          <div className="mt-12 flex justify-center">
+            <Link to="/all-models" className="btn-secondary px-8 py-4 flex items-center justify-center gap-2 text-lg">
+              Show All Models <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+        )}
       </div>
+
+      <ModelDetailsModal 
+        isOpen={!!selectedScooter} 
+        onClose={() => setSelectedScooter(null)} 
+        scooter={selectedScooter} 
+        onBookTestRide={onBookTestRide}
+      />
     </section>
   );
 }
